@@ -4,7 +4,7 @@ import util.control.Breaks._
 object CaesarCipher {
   val alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
-  def encrypt() = {
+  def Encryption() = {
     val inputText = scala.io.StdIn.readLine("Secret Message: ")
     val shift = (scala.io.StdIn.readLine("Shift By: ").toInt + alphabet.size) % alphabet.size
 
@@ -21,7 +21,7 @@ object CaesarCipher {
     println("Encrypted Message: " + outputText)
   }
 
-  def decrypt() = {
+  def Decryption() = {
     val inputText = scala.io.StdIn.readLine("Encrypted Message: ")
     val shift = (scala.io.StdIn.readLine("Shifted By: ").toInt + alphabet.size) % alphabet.size
 
@@ -38,21 +38,24 @@ object CaesarCipher {
     println("Secret Message: " + outputText)
   }
 
+  def Cipher(func:() => Unit) = {
+    func()
+  }
+
   def main(args: Array[String]): Unit = {
-    var op = 1
 
     breakable {
       do {
         print("\n1. Encrypt \n2. Decrypt \n")
         print("Enter option: ")
-        op = scala.io.StdIn.readInt()
+        val op = scala.io.StdIn.readInt()
 
         op match {
-          case 1 => encrypt()
-          case 2 => decrypt()
+          case 1 => Cipher(Encryption)
+          case 2 => Cipher(Decryption)
           case _ => break
         }
-      } while (op == 1 || op == 2)
+      } while (true)
     }
   }
 }
